@@ -1,0 +1,20 @@
+// https://dbdiagram.io/d/6548865d7d8bbd64658cd68f
+
+Table "users" {
+  "id" int [pk, increment]
+  "username" varchar [not null]
+  "password" varchar [not null]
+  "full_name" varchar [not null]
+  "balance" int [not null]
+}
+
+Table "transactions" {
+  "id" int [pk, increment]
+  "sender_id" int [not null]
+  "recipient_id" int [not null]
+  "amount" int [not null]
+}
+
+Ref:"users"."id" < "transactions"."sender_id"
+
+Ref:"users"."id" < "transactions"."recipient_id"

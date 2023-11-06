@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  bank-central-jakarta-mysql:
+    image: mysql:8.0
+    networks:
+      - bank-central-jakarta-network
+    ports:
+      - "9306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: bank_central_jakarta
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./database/migration/init_table.sql:/docker-entrypoint-initdb.d/1001.sql
+      - ./database/migration/init_data.sql:/docker-entrypoint-initdb.d/1002.sql
+
+networks:
+  bank-central-jakarta-network:
+    driver: bridge
