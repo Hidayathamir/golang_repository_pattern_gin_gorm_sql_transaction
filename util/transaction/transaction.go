@@ -8,6 +8,7 @@ import (
 
 type ITransactionManager interface {
 	SQLTransaction(ctx context.Context, fn func(context.Context) error) error
+	GetTxOrDB(ctx context.Context) *gorm.DB
 }
 
 type TransactionManager struct {
@@ -41,4 +42,14 @@ func (tm *TransactionManager) SQLTransaction(ctx context.Context, fn func(contex
 	}
 
 	return err
+}
+
+func (tm *TransactionManager) GetTxOrDB(ctx context.Context) *gorm.DB {
+	isHasTransaction := ctx.Value(CtxKey) != nil
+	if isHasTransaction {
+		if tx, ok := ctx.Value(CtxKey).(*gorm.DB); ok {
+			return tx
+		}
+	}
+	return tm.db
 }
