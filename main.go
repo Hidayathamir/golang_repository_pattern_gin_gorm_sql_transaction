@@ -4,7 +4,7 @@ import (
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/api/v1/payment/controller"
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/api/v1/payment/repository"
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/api/v1/payment/service"
-	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/util/transaction"
+	"github.com/Hidayathamir/txmanager"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -35,7 +35,7 @@ func getDBConnection() (*gorm.DB, error) {
 }
 
 func getPaymentController(db *gorm.DB) controller.IPaymentController {
-	txManager := transaction.NewTransactionManager(db)
+	txManager := txmanager.NewTransactionManager(db)
 	repo := repository.NewPaymentRepo(db, txManager)
 	service := service.NewPaymentService(repo, txManager)
 	return controller.NewPaymentController(service)

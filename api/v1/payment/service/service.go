@@ -7,7 +7,7 @@ import (
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/api/v1/payment/dto"
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/api/v1/payment/repository"
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/database/model"
-	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/util/transaction"
+	"github.com/Hidayathamir/txmanager"
 )
 
 type IPaymentService interface {
@@ -16,10 +16,10 @@ type IPaymentService interface {
 
 type PaymentService struct {
 	repo      repository.IPaymentRepo
-	txManager transaction.ITransactionManager
+	txManager txmanager.ITransactionManager
 }
 
-func NewPaymentService(repo repository.IPaymentRepo, txManager transaction.ITransactionManager) IPaymentService {
+func NewPaymentService(repo repository.IPaymentRepo, txManager txmanager.ITransactionManager) IPaymentService {
 	return &PaymentService{repo: repo, txManager: txManager}
 }
 

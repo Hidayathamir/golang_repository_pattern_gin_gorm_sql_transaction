@@ -1,8 +1,9 @@
 module github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction
 
-go 1.21.3
+go 1.21.4
 
 require (
+	github.com/Hidayathamir/txmanager v0.0.1
 	github.com/gin-gonic/gin v1.9.1
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/gorm v1.25.5

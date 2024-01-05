@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/database/model"
-	"github.com/Hidayathamir/golang_repository_pattern_gin_gorm_sql_transaction/util/transaction"
+	"github.com/Hidayathamir/txmanager"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
@@ -17,10 +17,10 @@ type IPaymentRepo interface {
 
 type PaymentRepo struct {
 	db        *gorm.DB
-	txManager transaction.ITransactionManager
+	txManager txmanager.ITransactionManager
 }
 
-func NewPaymentRepo(db *gorm.DB, txManager transaction.ITransactionManager) IPaymentRepo {
+func NewPaymentRepo(db *gorm.DB, txManager txmanager.ITransactionManager) IPaymentRepo {
 	return &PaymentRepo{db: db, txManager: txManager}
 }
 
