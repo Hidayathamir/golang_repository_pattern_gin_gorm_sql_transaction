@@ -1,6 +1,9 @@
 # golang_repository_pattern_gin_gorm_sql_transaction
 Golang repository pattern gin gorm sql transaction
 
+## How To Transaction
+Check file [service.go](./api/v1/payment/service/service.go). `Transfer` method do `txManager.SQLTransaction`, it can be nested like when it's called `p.updateBalanceSenderAndRecipient` which have it's own `txManager.SQLTransaction`.
+
 ## Quick Start
 
 1. Run MySQL database using Docker Compose:
