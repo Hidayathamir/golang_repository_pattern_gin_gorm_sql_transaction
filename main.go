@@ -36,7 +36,7 @@ func getDBConnection() (*gorm.DB, error) {
 
 func getPaymentController(db *gorm.DB) controller.IPaymentController {
 	txManager := transaction.NewTransactionManager(db)
-	repo := repository.NewPaymentRepo(txManager)
+	repo := repository.NewPaymentRepo(db, txManager)
 	service := service.NewPaymentService(repo, txManager)
 	return controller.NewPaymentController(service)
 }
